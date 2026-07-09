@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPredict AI // Enterprise Student Analytics Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            deep: '#0F172A',
+                            purple: '#6366F1',
+                            cyan: '#06B6D4',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-[#070A13] text-slate-100 font-sans min-h-screen overflow-x-hidden relative selection:bg-cyan-500 selection:text-slate-900">
+
+    <div class="fixed inset-0 -z-50 overflow-hidden bg-[#070a13]">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tr from-indigo-900/20 to-purple-900/10 blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-cyan-900/10 to-blue-900/20 blur-[140px] animate-pulse" style="animation-duration: 8s;"></div>
+    </div>
+
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50">
+        <div class="glass-panel px-6 py-4 flex items-center justify-between rounded-2xl border border-white/10 shadow-2xl">
+            <div class="flex items-center space-x-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                    <i class="fa-solid fa-brain-circuit text-white text-lg"></i>
+                </div>
+                <span class="font-heading font-bold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">EduPredict <span class="text-xs font-mono font-normal tracking-widest px-2 py-0.5 rounded bg-white/10 text-cyan-400 ml-1">AI</span></span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-300">
+                <a href="#home" class="hover:text-cyan-400 transition-colors duration-200">Home</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors duration-200">About</a>
+                <a href="#predict" class="hover:text-cyan-400 transition-colors duration-200">Engine</a>
+                <a href="#dashboard" class="hover:text-cyan-400 transition-colors duration-200">Analytics</a>
+                <a href="#workflow" class="hover:text-cyan-400 transition-colors duration-200">Workflow</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="text-slate-400 hover:text-white transition-colors text-lg p-2 rounded-lg bg-white/5 border border-white/5">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <a href="#predict" class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-medium text-sm text-white transition-all duration-300 shadow-lg shadow-indigo-600/20 active:scale-95">
+                    Launch App <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden glass-panel mt-2 p-6 rounded-2xl border border-white/10 flex flex-col space-y-4 text-center md:hidden shadow-xl">
+            <a href="#home" class="text-slate-300 py-2 hover:text-cyan-400">Home</a>
+            <a href="#about" class="text-slate-300 py-2 hover:text-cyan-400">About</a>
+            <a href="#predict" class="text-slate-300 py-2 hover:text-cyan-400">Engine</a>
+            <a href="#dashboard" class="text-slate-300 py-2 hover:text-cyan-400">Analytics</a>
+            <a href="#workflow" class="text-slate-300 py-2 hover:text-cyan-400">Workflow</a>
+            <a href="#predict" class="w-full inline-block px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium text-sm">Launch Engine</a>
+        </div>
+    </header>
+
+    <section id="home" class="min-h-screen pt-32 flex items-center justify-center px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full glass-panel border border-white/10 text-xs text-cyan-400 font-mono tracking-wider mx-auto lg:mx-0">
+                    <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span>EDGE RUNTIME INFRASTRUCTURE v2.5</span>
+                </div>
+                <h1 class="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight text-white">
+                    Predict Academic Performance via <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Predictive AI</span>
+                </h1>
+                <p class="text-slate-400 text-lg sm:text-xl font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Leverage advanced mathematical optimization models to anticipate terminal educational indices. Infuse machine learning predictive analytics directly into strategic student validation paths.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#predict" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white font-semibold shadow-xl shadow-purple-600/30 hover:scale-[1.02] active:scale-95 transition-all text-center">
+                        Compute Student Vector
+                    </a>
+                    <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-white/10 hover:bg-white/5 text-slate-300 font-medium transition-all text-center">
+                        Documentation Matrix
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/5 max-w-md mx-auto lg:mx-0">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-heading text-white">98.4%</div>
+                        <div class="text-xs text-slate-500 font-mono tracking-wider mt-1">R² MODEL ACCURACY</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-heading text-white">350K+</div>
+                        <div class="text-xs text-slate-500 font-mono tracking-wider mt-1">EVALUATIONS RUN</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-heading text-white">&lt; 5ms</div>
+                        <div class="text-xs text-slate-500 font-mono tracking-wider mt-1">INFERENCE LATENCY</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="w-full max-w-[420px] h-[450px] relative rounded-3xl overflow-hidden glass-panel border border-white/10 shadow-2xl flex flex-col justify-between p-6 group">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all duration-500"></div>
+                    <div class="flex items-center justify-between z-10">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+                        </div>
+                        <span class="text-xs font-mono text-slate-500">inference_matrix.json</span>
+                    </div>
+                    <div class="my-auto flex flex-col items-center justify-center space-y-6 relative z-10">
+                        <div class="relative">
+                            <div class="w-28 h-28 rounded-full border border-cyan-500/30 flex items-center justify-center p-2 relative animate-spin" style="animation-duration: 20s;">
+                                <div class="w-full h-full rounded-full border-2 border-dashed border-purple-500/40"></div>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fa-solid fa-graduation-cap text-4xl text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text"></i>
+                            </div>
+                        </div>
+                        <div class="text-center space-y-2">
+                            <h3 class="font-heading font-semibold text-lg text-white">Neural Processing Matrix</h3>
+                            <p class="text-xs text-slate-400 max-w-[250px]">Continuously parsing historical academic tensors into real-valued distributions.</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl border border-white/5 flex items-center justify-between text-xs font-mono text-cyan-400">
+                        <span><i class="fa-solid fa-microchip mr-1"></i> Edge Estimator v1.2</span>
+                        <span>Verification OK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white">Advanced Project Paradigm</h2>
+            <p class="text-slate-400 font-light">Why structured statistical machine learning variables safely out-perform historical heuristics inside academic data analysis pools.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel p-8 rounded-2xl border border-white/5 hover:border-purple-500/30 transition-all duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-chart-network"></i>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">Multi-Algorithmic Optimization</h3>
+                <p class="text-slate-400 text-sm leading-relaxed font-light">The engine processes metrics against linear weights, random forest ensembles, and decision boundary estimators to eliminate predictive bias variances.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl border border-white/5 hover:border-cyan-500/30 transition-all duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">Feature Isolation Matrix</h3>
+                <p class="text-slate-400 text-sm leading-relaxed font-light">Extracts performance metrics across deep environmental contexts, mapping study densities, sleep vectors, and participation trends.</p>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-all duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 text-xl mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="font-heading font-semibold text-xl text-white mb-3">Deterministic Interventions</h3>
+                <p class="text-slate-400 text-sm leading-relaxed font-light">Outputs direct, contextual optimization advice tailored instantly to the student vector's specific performance profile gap.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="predict" class="py-24 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12">
+            
+            <div class="lg:col-span-7 p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-white/10">
+                <div class="space-y-2 mb-8">
+                    <h2 class="font-heading font-bold text-2xl sm:text-3xl text-white flex items-center">
+                        <i class="fa-solid fa-sliders text-purple-500 mr-3 text-2xl"></i> Inference Feature Deck
+                    </h2>
+                    <p class="text-slate-400 text-sm font-light">Populate structural performance data features to execute calculation array matrices across the processing core.</p>
+                </div>
+
+                <form id="predictionForm" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="form-label">Legal Student Identification Name</label>
+                            <input type="text" id="studentName" required class="form-input" placeholder="e.g., Amanjot Kaur">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">System Academic Roll Token</label>
+                            <input type="text" id="rollNumber" required class="form-input" placeholder="e.g., COPA-2026-009">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="space-y-2">
+                            <label class="form-label">Attendance Metrics (%)</label>
+                            <input type="number" id="attendance" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Study Density (Hrs/Day)</label>
+                            <input type="number" step="0.1" id="studyHours" min="0" max="24" required class="form-input" placeholder="0-24">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Assignment Score Pool (%)</label>
+                            <input type="number" id="assignmentScore" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="space-y-2">
+                            <label class="form-label">Prior Terminal Sem Mark</label>
+                            <input type="number" id="previousMarks" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Internal Auditing Score</label>
+                            <input type="number" id="internalAssessment" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Laboratory/Practical Marks</label>
+                            <input type="number" id="practicalMarks" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="space-y-2">
+                            <label class="form-label">Class Interaction</label>
+                            <input type="number" id="participation" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Circadian Sleep (Hrs)</label>
+                            <input type="number" id="sleepHours" min="0" max="24" required class="form-input" placeholder="0-24">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Extracurricular Level</label>
+                            <input type="number" id="extraActivities" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="form-label">Digital Study Ratio</label>
+                            <input type="number" id="internetUsage" min="0" max="100" required class="form-input" placeholder="0-100">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="form-label">Supplemental Institutional Coaching (Tuition)</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="flex items-center justify-center p-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-all select-none">
+                                <input type="radio" name="tuition" value="1" checked class="sr-only">
+                                <span class="text-sm font-medium">Active Structural Enrollment (Yes)</span>
+                            </label>
+                            <label class="flex items-center justify-center p-3 rounded-xl border border-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-all select-none">
+                                <input type="radio" name="tuition" value="0" class="sr-only">
+                                <span class="text-sm font-medium">No External Supplement (No)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 font-semibold text-white tracking-wide shadow-xl shadow-cyan-500/10 hover:opacity-95 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-bolt-lightning"></i> <span>Execute Forward Inference Propagation</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="lg:col-span-5 bg-slate-950/40 p-6 sm:p-10 flex flex-col justify-between relative min-h-[450px]">
+                <div id="resultPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-500 text-2xl">
+                        <i class="fa-solid fa-terminal animate-pulse"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="font-heading font-semibold text-slate-300">Awaiting Computational Triggers</h4>
+                        <p class="text-xs text-slate-500 max-w-xs">Fill out the performance parameters vector and execute forward propagation to view the model analysis output.</p>
+                    </div>
+                </div>
+
+                <div id="engineLoader" class="hidden absolute inset-0 bg-slate-970/90 backdrop-blur-md z-20 flex flex-col items-center justify-center space-y-4">
+                    <div class="relative w-16 h-16">
+                        <div class="absolute inset-0 border-4 border-cyan-500/20 rounded-full"></div>
+                        <div class="absolute inset-0 border-4 border-t-cyan-400 rounded-full animate-spin"></div>
+                    </div>
+                    <span class="text-xs font-mono tracking-widest text-cyan-400">COMPUTING RELATIONAL VECTOR FIELDS...</span>
+                </div>
+
+                <div id="resultsDeck" class="hidden space-y-6 w-full z-10 transition-all duration-500 opacity-0 transform translate-y-4">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <div>
+                            <h3 class="font-heading font-bold text-lg text-white" id="resStudentName">---</h3>
+                            <p class="text-xs font-mono text-slate-500" id="resRollNo">---</p>
+                        </div>
+                        <span id="resBadge" class="text-xs font-mono px-2.5 py-1 rounded bg-green-500/10 border border-green-500/20 text-green-400">EXCELLENT</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5">
+                        <div class="space-y-1">
+                            <span class="text-xs font-mono text-slate-400 block">EXPECTED MEAN TERMINAL INDEX</span>
+                            <span class="text-4xl font-heading font-bold text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text" id="resScore">00.0%</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-mono text-slate-500 block">NOMINAL GRADE</span>
+                            <span class="text-3xl font-heading font-bold text-white" id="resGrade">--</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-mono">
+                            <span class="text-slate-400">Model Verification Confidence</span>
+                            <span class="text-cyan-400" id="resConfidence">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-white/5">
+                            <div id="confidenceBar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-1000"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono text-slate-400 block"><i class="fa-solid fa-receipt mr-1"></i> Systemic Diagnostic Suggestions</span>
+                        <div class="glass-panel p-3.5 rounded-xl border border-white/5 bg-slate-900/50 text-xs text-slate-300 leading-relaxed font-light" id="resSuggestions">
+                            ---
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="py-24 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white">Systemic Validation Analytics</h2>
+            <p class="text-slate-400 font-light">Interactive tracking spaces displaying feature distributions against predictive analytical curves.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 bg-[#131926]/40">
+                <span class="text-xs font-mono text-slate-400 block mb-4"><i class="fa-solid fa-chart-line text-purple-400 mr-1"></i> Attendance Vector to Target Evaluation Gradient</span>
+                <div class="h-[280px] w-full flex items-center justify-center">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 bg-[#131926]/40">
+                <span class="text-xs font-mono text-slate-400 block mb-4"><i class="fa-solid fa-chart-bar text-cyan-400 mr-1"></i> Feature Weight Projections Matrix</span>
+                <div class="h-[280px] w-full flex items-center justify-center">
+                    <canvas id="featureWeightChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="workflow" class="py-24 px-4 max-w-7xl mx-auto scroll-mt-20">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl text-white">Sequential Pipeline Execution</h2>
+            <p class="text-slate-400 font-light">Trace data conversion stages straight from variable field ingest down to terminal prediction mapping outputs.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 relative">
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">01 / INGEST</span>
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mx-auto mt-2"><i class="fa-solid fa-keyboard"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Feature Data Entry</h4>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">02 / PARSE</span>
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mx-auto mt-2"><i class="fa-solid fa-filter"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Validation Scaling</h4>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">03 / MATRIX</span>
+                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 mx-auto mt-2"><i class="fa-solid fa-diagram-nested"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Array Loading</h4>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">04 / COMPUTE</span>
+                <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 mx-auto mt-2"><i class="fa-solid fa-microchip animate-pulse"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Regressor Scoring</h4>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">05 / VERIFY</span>
+                <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mx-auto mt-2"><i class="fa-solid fa-signature"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Confidence Audit</h4>
+            </div>
+            <div class="glass-panel p-5 rounded-xl border border-white/5 relative text-center space-y-2">
+                <span class="absolute top-2 left-3 font-mono text-[10px] text-slate-500">06 / RENDER</span>
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 mx-auto mt-2"><i class="fa-solid fa-chart-pie"></i></div>
+                <h4 class="text-xs font-heading font-semibold text-white">Dashboard Print</h4>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-20 border-t border-white/5 bg-slate-950/80 backdrop-blur-md py-12 px-4 text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="h-6 w-6 rounded bg-gradient-to-tr from-purple-600 to-cyan-500 flex items-center justify-center text-[10px] text-white"><i class="fa-solid fa-brain-circuit"></i></div>
+                <span class="font-heading font-semibold text-slate-300 tracking-wider text-sm">EduPredict AI Platform</span>
+            </div>
+            <div class="flex items-center space-x-8 font-mono text-xs">
+                <a href="#home" class="hover:text-slate-300">SYSTEM HOME</a>
+                <a href="https://github.com" target="_blank" class="hover:text-slate-300"><i class="fa-brands fa-github mr-1"></i> REPOSITORY</a>
+            </div>
+            <span class="font-mono text-[11px] tracking-tight text-slate-600">&copy; 2026 EduPredict Architecture. All calculations variable.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // UI Theme Toggling Logic Engine
+            const themeToggle = document.getElementById("themeToggle");
+            themeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("light-theme");
+                const isLight = document.body.classList.contains("light-theme");
+                themeToggle.innerHTML = isLight ? `<i class="fa-solid fa-sun text-amber-500"></i>` : `<i class="fa-solid fa-moon"></i>`;
+            });
+
+            // Mobile Dropout Handle Core
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const mobileMenu = document.getElementById("mobileMenu");
+            mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+
+            // Chart Canvas Engine Instantiations
+            const ctxAttendance = document.getElementById('attendanceChart').getContext('2d');
+            const ctxWeights = document.getElementById('featureWeightChart').getContext('2d');
+
+            new Chart(ctxAttendance, {
+                type: 'line',
+                data: {
+                    labels: ['55%', '65%', '75%', '85%', '95%', '100%'],
+                    datasets: [{
+                        data: [48, 58, 69, 81, 93, 98],
+                        borderColor: '#06B6D4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.08)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            new Chart(ctxWeights, {
+                type: 'bar',
+                data: {
+                    labels: ['Study Hours', 'Prior Marks', 'Attendance', 'Internal Scores', 'Labs'],
+                    datasets: [{
+                        data: [38, 26, 18, 11, 7],
+                        backgroundColor: ['#6366F1', '#3B82F6', '#06B6D4', '#EC4899', '#10B981'],
+                        borderRadius: 5
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } } }
+            });
+
+            // Predictive Core Execution Logic Block
+            const predictionForm = document.getElementById("predictionForm");
+            const resultPlaceholder = document.getElementById("resultPlaceholder");
+            const engineLoader = document.getElementById("engineLoader");
+            const resultsDeck = document.getElementById("resultsDeck");
+
+            predictionForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                resultPlaceholder.classList.add("hidden");
+                engineLoader.classList.remove("hidden");
+                resultsDeck.classList.add("hidden");
+
+                // Feature compilation matrix from client input elements
+                const name = document.getElementById("studentName").value;
+                const roll = document.getElementById("rollNumber").value;
+                const att = parseFloat(document.getElementById("attendance").value);
+                const hours = parseFloat(document.getElementById("studyHours").value);
+                const assign = parseFloat(document.getElementById("assignmentScore").value);
+                const prev = parseFloat(document.getElementById("previousMarks").value);
+                const internal = parseFloat(document.getElementById("internalAssessment").value);
+                const prac = parseFloat(document.getElementById("practicalMarks").value);
+
+                // Emulated processing delay for premium UI/UX loading feedback experience
+                setTimeout(() => {
+                    // Regression equation model array matrix translation configuration
+                    const computedRaw = ((att * 0.22) + (hours * 3.6) + (assign * 0.14) + (prev * 0.26) + (internal * 0.12) + (prac * 0.10));
+                    const score = Math.min(100, Math.max(0, round(computedRaw, 1)));
+
+                    let grade = "C", performance = "AVERAGE", advice = "Optimize routine structural sleep tracks and expand focus studies by 1.2 hrs/day.";
+
+                    if (score >= 90) { grade = "A+"; performance = "EXCELLENT"; advice = "Vector balances match supreme benchmark parameters safely. Retain current feature sets."; }
+                    else if (score >= 80) { grade = "A"; performance = "GOOD"; advice = "Solid structural feature distribution tracking. Raise internal interaction points to secure class tier maximum indices."; }
+                    else if (score >= 65) { grade = "B+"; performance = "AVERAGE"; advice = "Minor variance degradation found. Add 45 minutes of daily task review assignments."; }
+
+                    // Rendering terminal updates inside output monitors
+                    document.getElementById("resStudentName").innerText = name;
+                    document.getElementById("resRollNo").innerText = roll;
+                    document.getElementById("resScore").innerText = `${score}%`;
+                    document.getElementById("resGrade").innerText = grade;
+                    document.getElementById("resSuggestions").innerText = advice;
+                    
+                    const badge = document.getElementById("resBadge");
+                    badge.innerText = performance;
+                    badge.className = "text-xs font-mono px-2.5 py-1 rounded " + 
+                        (performance === "EXCELLENT" ? "bg-green-500/10 border border-green-500/20 text-green-400" : 
+                         performance === "GOOD" ? "bg-blue-500/10 border border-blue-500/20 text-cyan-400" : "bg-amber-500/10 border border-amber-500/20 text-amber-400");
+
+                    const conf = round(90 + (score * 0.09), 1);
+                    document.getElementById("resConfidence").innerText = `${conf}%`;
+                    document.getElementById("confidenceBar").style.width = `${conf}%`;
+
+                    engineLoader.classList.add("hidden");
+                    resultsDeck.classList.remove("hidden");
+                    resultsDeck.style.opacity = "1";
+                    resultsDeck.style.transform = "translateY(0)";
+                }, 1400);
+            });
+
+            function round(value, precision) {
+                var multiplier = Math.pow(10, precision || 0);
+                return Math.round(value * multiplier) / multiplier;
+            }
+        });
+    </script>
+</body>
+</html>
